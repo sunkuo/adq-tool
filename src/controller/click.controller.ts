@@ -18,6 +18,15 @@ export class ClickController {
       },
     });
     console.log('clickId:', clickId, 'ip: ', ip, 'region: ', data.data);
-    return 'done';
+    const { data: ret } = await axios.post(
+      'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=694be766-47a0-4b10-b903-bc9759d5b298',
+      {
+        msgtype: 'text',
+        text: {
+          content: 'hello',
+        },
+      }
+    );
+    return ret;
   }
 }
