@@ -26,15 +26,17 @@ export class ClickController {
       return 'done';
     }
     console.log(`准备推送 adId = ${adId} IP = ${ip} 到企业微信`);
-    const { data: ret } = await axios.post(
-      'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=694be766-47a0-4b10-b903-bc9759d5b298',
-      {
-        msgtype: 'text',
-        text: {
-          content: `AdId：${adId}，Ip = ${JSON.stringify(data.data)}`,
-        },
-      }
-    );
-    return ret;
+    console.log(`AdId：${adId}，Ip = ${JSON.stringify(data.data)}`);
+    // const { data: ret } = await axios.post(
+    //   'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=694be766-47a0-4b10-b903-bc9759d5b298',
+    //   {
+    //     msgtype: 'text',
+    //     text: {
+    //       content: `AdId：${adId}，Ip = ${JSON.stringify(data.data)}`,
+    //     },
+    //   }
+    // );
+    // console.log(ret);
+    return 'done';
   }
 }
