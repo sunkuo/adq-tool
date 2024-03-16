@@ -6,7 +6,8 @@ export class ClickController {
   @Get('/click')
   async click(
     @Query('click_id') clickId: string,
-    @Query('ip') ip: string
+    @Query('ip') ip: string,
+    @Query('adgroup_id') adId: string
   ): Promise<string> {
     if (!ip) return 'done';
     const { data } = await axios.get('https://api.ip138.com/ip/', {
@@ -17,13 +18,13 @@ export class ClickController {
         ip,
       },
     });
-    console.log('clickId:', clickId, 'ip: ', ip, 'region: ', data.data);
+    if (!data || !data.data) return 'done';
     const { data: ret } = await axios.post(
       'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=694be766-47a0-4b10-b903-bc9759d5b298',
       {
         msgtype: 'text',
         text: {
-          content: 'hello',
+          content: `AdId：${adId}，Ip = ${JSON.stringify(data.data)}`,
         },
       }
     );
